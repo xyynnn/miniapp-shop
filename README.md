@@ -1,1 +1,1 @@
-# mini-apps-shop
+# miniapp-shop
