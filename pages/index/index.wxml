@@ -49,11 +49,21 @@
 		 wx:key="floor_title"
 		>
 			<!-- 标题 -->
-			<view>
+			<view class="floor_title">
 				<image mode="widthFix" src="{{item1.floor_title.image_src}}" />
 			</view>
 			<!-- 内容 -->
-			<view class="floor_list"></view>
+			<view class="floor_list">
+				<navigator 
+        		wx:for="{{item1.product_list}}"
+    		    wx:for-item="item2"
+    		    wx:for-index="index2"
+    		    wx:key="name"
+    		    url="{{item2.navigator_url}}"
+    		    >
+        			<image mode="{{index2===0?'widthFix':'scaleToFill'}}" src="{{item2.image_src}}"></image>
+    	  		</navigator>
+			</view>
 		</view>
 	</view>
 	<!-- 楼层 结束 -->
