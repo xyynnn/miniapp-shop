@@ -13,6 +13,13 @@
     1 当前的页码 ++
     2 重新发送请求
     3 数据请求回来 要对data的数组 进行 拼接 而不是全部替换！！！
+2 下拉刷新页面
+  1 触发下拉刷新事件 需要在页面的json文件中开启一个配置项
+    找到 触发下拉刷新的事件
+  2 重置 数据 数组
+  3 重置页码 设置为1
+  4 重新发送请求
+  5 数据请求回来 需要手动的关闭 等待效果
 */
 import { request } from "../../request/index.js";
 Page({
@@ -66,8 +73,11 @@ Page({
     this.totalPages=Math.ceil(total/this.QueryParams.pagesize)
     this.setData({
       //拼接了数组
-      goodsList:[...this.data.goodslist,...res.goods]
+      goodsList:[...this.data.goodsList,...res.goods]
     })
+
+    //关闭下拉刷新的窗口 如果没有调用下拉刷新的窗口 直接关闭也不会报错
+    wx.stopPullDownRefresh();
   },
 
   //标题点击事件 从子组件传递过来
@@ -89,12 +99,26 @@ Page({
     //1 判断还有没有下一页数据
     if(this.QueryParams.pagenum>=this.totalPages){
       //没有下一页数据
-      console.log('%c'+"没有下一页数据","color:red;font-size:100px;background-image:linear-gradient(to right,#0094ff,pink)")
+      // console.log('%c'+"没有下一页数据","color:red;font-size:100px;background-image:linear-gradient(to right,#0094ff,pink)")
+      wx.showToast({
+        title: '没有下一页数据'
+      });
     }else{
       //还有下一页数据
       // console.log('%c'+"有下一页数据","color:red;font-size:100px;background-image:linear-gradient(to right,#0094ff,pink)")
       this.QueryParams.pagenum++;
       this.getGoodsList();
     }
+  },
+  //下拉刷新事件
+  onPullDownRefresh(){
+    //1 重置数组
+    this.setData({
+      goodsList:[]
+    })
+    //2 重置页码
+    this.QueryParams.pagenum=1;
+    //3 发送请求
+    this.getGoodsList();
   }
 })
