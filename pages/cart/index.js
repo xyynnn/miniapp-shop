@@ -13,14 +13,33 @@
       1 诱导用户 自己 打开 授权设置页面(wx.openSetting) 当用户重新给予 获取地址权限的时候
       2 获取收货地址
     4 把获取到的收货地址 存入到 本地存储中
+2 页面加载完毕
+  0 onLoad onShow
+    1 获取本地存储中的地址数据
+    2 把数据 设置给data中的一个变量
+3 onShow
+  1 把數據緩存中的購物車數組
+  2 把購物車數據 填充到data中
     
 */
 
 import { getSetting, chooseAddress, openSetting } from "../../utils/asyncWx.js";
 Page({
   //点击 收货地址
-
-
+  data:{
+    address:{},
+    cart:[]
+  },
+  onShow(){
+    //1 获取缓存中的收货地址信息
+    const address=wx.getStorageSync('address');
+    //1 獲取緩存中的購物車數據
+    const cart=wx.getStorageSync('cart');
+    //2 给data赋值
+    this.setData({
+      address
+    })
+  },
   async handleChooseAddress() {
     try {
       //2 获取收货地址
@@ -53,7 +72,6 @@ Page({
       //           });
       //         }
       //       });
-
       //     }
       //   },
       //   fail: () => {},
@@ -68,9 +86,10 @@ Page({
         await openSetting();
       }
       //4 调用获取收货地址的api
-      const address = await chooseAddress();
+      let address = await chooseAddress(); 
+      address.all=address.provinceName+address.cityName+address.countyName+address.detailInfo;
       //5 存入到缓存中
-      wx.setStorageSync("address", address)
+      wx.setStorageSync('address', address)
     } catch (error) {
       console.log(error);
     }
