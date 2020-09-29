@@ -1,66 +1,37 @@
-// pages/pay/index.js
+/*
+1 页面加载的时候
+  1 从缓存中获取购物车数据 渲染到页面中
+    这些数据 checked=true
+*/
+
+import { getSetting, chooseAddress, openSetting, showModal, showToast } from "../../utils/asyncWx.js";
 Page({
 
-  /**
-   * 页面的初始数据
-   */
   data: {
-
+    address: {},
+    cart: [],
+    totalPrice: 0,
+    totalNum: 0
   },
+  onShow() {
+    //1 获取缓存中的收货地址信息
+    const address = wx.getStorageSync('address');
+    //1 獲取緩存中的購物車數據
+    let cart = wx.getStorageSync("cart") || [];
+    //过滤后的购物车数组
+    cart = cart.filter(v => v.checked)
+    this.setData({ address })
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
+    //1 总价格 总数量
+    let totalPrice = 0;
+    let totalNum = 0;
+    cart.forEach(v => {
+      totalPrice += v.num * v.goods_price;
+      totalNum += v.num;
+    })
 
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+    this.setData({
+      cart, totalPrice, totalNum, address
+    });
   }
 })

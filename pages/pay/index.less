@@ -3,13 +3,6 @@ page {
 }
 
 .revice_address_row {
-    .address_btn {
-        padding: 20rpx;
-
-        button {
-            width: 60%;
-        }
-    }
 
     .user_info_row {
         display: flex;
@@ -40,17 +33,6 @@ page {
             display      : flex;
             padding      : 10rpx;
             border-bottom: 1rpx solid #ccc;
-
-            .cart_chk_wrap {
-                flex           : 1;
-                display        : flex;
-                justify-content: center;
-                align-items    : center;
-
-                checkbox-group {
-                    checkbox {}
-                }
-            }
 
             .cart_img_wrap {
                 flex: 2;
@@ -86,15 +68,6 @@ page {
                     .cart_num_tool {
                         display: flex;
 
-                        .num_edit {
-                            width          : 55rpx;
-                            height         : 55rpx;
-                            display        : flex;
-                            justify-content: center;
-                            align-items    : center;
-                            border         : 1px solid #ccc;
-                        }
-
                         .goods_num {
                             width          : 55rpx;
                             height         : 55rpx;
@@ -119,21 +92,15 @@ page {
     display         : flex;
     border-top      : 1rpx solid #ccc;
 
-    .all_chk_wrap {
-        flex           : 2;
-        display        : flex;
-        justify-content: center;
-        align-items    : center;
-    }
-
     .total_price_wrap {
-        flex: 5;
+        flex         : 5;
         padding-right: 15rpx;
-        text-align: right;
+        text-align   : right;
+
         .total_price {
             .total_price_text {
-                color:var(--themeColor);
-                font-size:32rpx;
+                color      : var(--themeColor);
+                font-size  : 32rpx;
                 font-weight: 600;
             }
         }
@@ -141,13 +108,13 @@ page {
     }
 
     .order_pay_wrap {
-        flex: 3;
+        flex            : 3;
         background-color: var(--themeColor);
-        color:#fff;
-        font-size: 32rpx;
-        font-weight: 600;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        color           : #fff;
+        font-size       : 32rpx;
+        font-weight     : 600;
+        display         : flex;
+        justify-content : center;
+        align-items     : center;
     }
 }
