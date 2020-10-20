@@ -58,7 +58,7 @@ Page({
     }
     //3 创建订单
     //3.1 准备 请求头参数
-    const header = { Authorization: token }
+     const header = { Authorization: token }
     //3.2 准备请求体参数
     const order_price=this.data.totalPrice;
     const consignee_addr=this.data.address.all;
@@ -71,12 +71,14 @@ Page({
     }))
     const orderParams={order_price,consignee_addr,goods};
     //4 准备发送请求 创建订单 获取订单编号
-    const res=await request({
+    /*const {order_number}=await request({
       url:"/my/orders/create",
       method:"POST",
       data:orderParams,
       header
-    })
-    console.log(res)
+     })//console.log(res)
+    //5 发起 预支付接口
+    const res=await request({url:"/my/orders/req_unifiedorder",method:"POST",header,data:{order_number}})
+    console.log(res) */
   }
 })

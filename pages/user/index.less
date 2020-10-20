@@ -1,0 +1,19 @@
+.user_info_wrap{
+    height: 45vh;
+    background-color: var(--themeColor);
+    .user_img_wrap{
+        position: relative;
+        .user_bg{
+            height: 50vh;
+            //高斯模糊
+            filter: blur(10rpx);
+        }
+        .user_info{
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top:30%;
+            text-align: center;
+        }
+    }
+}
