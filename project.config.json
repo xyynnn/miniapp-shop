@@ -101,6 +101,24 @@
         {
           "name": "个人中心",
           "pathName": "pages/user/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "订单查询",
+          "pathName": "pages/order/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/goods_detail/index",
+          "pathName": "pages/goods_detail/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "商品收藏",
+          "pathName": "pages/collect/index",
           "scene": null
         }
       ]
