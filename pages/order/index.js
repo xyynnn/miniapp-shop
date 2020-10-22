@@ -57,9 +57,9 @@ Page({
   //获取订单列表的方法
   async getOrders(type){
     const res=await request({url:"/my/orders/all",data:{type}})
-    // console.log(res)
+    console.log(res)
     /* this.setData({
-      orders
+      orders:res.orders
     }) */
   },
   handleTabsItemChange(e) {

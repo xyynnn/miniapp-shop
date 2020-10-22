@@ -2,6 +2,7 @@
 Page({
 
   data: {
+    collect:[],
     tabs: [
       {
         id: 0,
@@ -24,6 +25,12 @@ Page({
         isActive: false
       }
     ],
+  },
+  onShow(){
+    const collect=wx.getStorageSync('collect')||[];
+    this.setData({
+      collect
+    })
   },
   handleTabsItemChange(e) {
     //1 获取被点击的标题索引

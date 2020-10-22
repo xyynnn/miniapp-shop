@@ -15,7 +15,7 @@
   4 创建订单 获取订单编号
 */
 import { request } from "../../request/index.js";
-import { getSetting, chooseAddress, openSetting, showModal, showToast } from "../../utils/asyncWx.js";
+import { getSetting, chooseAddress, openSetting, showModal, showToast, requestPayment } from "../../utils/asyncWx.js";
 Page({
 
   data: {
@@ -58,27 +58,31 @@ Page({
     }
     //3 创建订单
     //3.1 准备 请求头参数
-     const header = { Authorization: token }
+    // const header = { Authorization: token }
     //3.2 准备请求体参数
-    const order_price=this.data.totalPrice;
-    const consignee_addr=this.data.address.all;
-    const cart=this.data.cart;
-    let goods=[];
-    cart.forEach(v=>goods.push({
-      goods_id:v.goods_id,
-      goods_number:v.num,
-      goods_price:v.goods_price
+    const order_price = this.data.totalPrice;
+    const consignee_addr = this.data.address.all;
+    const cart = this.data.cart;
+    let goods = [];
+    cart.forEach(v => goods.push({
+      goods_id: v.goods_id,
+      goods_number: v.num,
+      goods_price: v.goods_price
     }))
-    const orderParams={order_price,consignee_addr,goods};
+    const orderParams = { order_price, consignee_addr, goods };
     //4 准备发送请求 创建订单 获取订单编号
-    /*const {order_number}=await request({
+    /* const {order_number}=await request({
       url:"/my/orders/create",
       method:"POST",
       data:orderParams,
       header
-     })//console.log(res)
+     })
+     console.log(order_number) */
     //5 发起 预支付接口
-    const res=await request({url:"/my/orders/req_unifiedorder",method:"POST",header,data:{order_number}})
+    /* const {pay}=await request({url:"/my/orders/req_unifiedorder",method:"POST",header,data:{order_number}})
     console.log(res) */
+    //6 发起微信支付
+     /* const res=await requestPayment(pay);
+     console.log(res) */
   }
 })

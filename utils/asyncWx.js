@@ -106,17 +106,23 @@ export const login = () => {
     })
 }
 
-/* export const login = () => {
+/**
+ * promise 形式 小程序微信支付
+ * @param {object} pay 支付必要的参数
+ */
+export const requestPayment = (pay) => {
     return new Promise((resolve, reject) => {
-        wx.login({
-            timeout:10000,
-            success: (result)=>{
-                resolve(result);
+        wx.requestPayment({
+            ...pay,
+            success: (result) => {
+                resolve(result)
             },
-            fail: (err)=>{
+            fail: () => {},
+            complete: () => {
                 reject(err);
             }
         });
+          
 
     })
-} */
+}
