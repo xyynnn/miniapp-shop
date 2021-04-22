@@ -1,2 +1,2 @@
 # miniapp-shop
-app界面
+原生小程序
